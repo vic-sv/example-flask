@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, send_from_directory
 import os
-import cv2
+#import cv2
 import numpy as np
-import onnxruntime
+#import onnxruntime
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
@@ -28,27 +28,28 @@ def allowed_file(filename):
 
 
 def apply_onnx_model(image_path, output_path):
-    try:
-        img = cv2.imread(image_path)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Ensure correct color format
-        img = cv2.resize(img, (224, 224)) # Resize to model input size (adjust if needed)
-        img = img.astype(np.float32) / 255.0  # Normalize
-        img = np.transpose(img, (2, 0, 1)) # Change HWC to CHW
-        img = np.expand_dims(img, axis=0) # Add batch dimension
-
-        ort_inputs = {input_name: img}
-        ort_outs = ort_session.run([output_name], ort_inputs)
-        predictions = ort_outs[0]
-
-        # Process predictions (example: get class with highest probability)
-        predicted_class = np.argmax(predictions)
-
-        # For demonstration, we'll just save a copy of the image.
-        cv2.imwrite(output_path, cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)) #Save the image
-        return predicted_class
-    except Exception as e:
-        print(f"Error processing image: {e}")
-        return None
+    return None
+#    try:
+#        img = cv2.imread(image_path)
+#        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # Ensure correct color format
+#        img = cv2.resize(img, (224, 224)) # Resize to model input size (adjust if needed)
+#        img = img.astype(np.float32) / 255.0  # Normalize
+#        img = np.transpose(img, (2, 0, 1)) # Change HWC to CHW
+#        img = np.expand_dims(img, axis=0) # Add batch dimension
+#
+#        ort_inputs = {input_name: img}
+#        ort_outs = ort_session.run([output_name], ort_inputs)
+#        predictions = ort_outs[0]
+#
+#        # Process predictions (example: get class with highest probability)
+#        predicted_class = np.argmax(predictions)
+#
+#        # For demonstration, we'll just save a copy of the image.
+#        cv2.imwrite(output_path, cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)) #Save the image
+#        return predicted_class
+#    except Exception as e:
+#        print(f"Error processing image: {e}")
+#        return None
 
 
 
@@ -87,4 +88,4 @@ def output_file(filename):
     return send_from_directory(app.config['OUTPUT_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
