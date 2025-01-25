@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory
 import os
 #import cv2
-import numpy as np
+#import numpy as np
 #import onnxruntime
 
 app = Flask(__name__)
@@ -16,10 +16,10 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 # Load your ONNX model
-onnx_model_path = "your_model.onnx"  # Replace with your ONNX model path
-ort_session = onnxruntime.InferenceSession(onnx_model_path)
-input_name = ort_session.get_inputs()[0].name
-output_name = ort_session.get_outputs()[0].name
+#onnx_model_path = "your_model.onnx"  # Replace with your ONNX model path
+#ort_session = onnxruntime.InferenceSession(onnx_model_path)
+#input_name = ort_session.get_inputs()[0].name
+#output_name = ort_session.get_outputs()[0].name
 
 
 def allowed_file(filename):
